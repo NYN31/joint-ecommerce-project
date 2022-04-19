@@ -10,17 +10,22 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
+import java.util.Date;
 
 @Slf4j
+@Builder
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString
-@Table
-public class TokenEntity extends BaseEntity {
-    @Column(name = "wallet_Id")
-    @NotBlank
-    @NotNull
-    private String walletId;
+@Entity
+@Table(name = "token_details")
+public class TokenEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "email")
     @NotBlank
@@ -37,11 +42,23 @@ public class TokenEntity extends BaseEntity {
     @NotNull
     private String token;
 
-    @Column(name = "updated_at", nullable = false)
+    @Column(name = "issued_at", nullable = false)
+    @CreationTimestamp
+    private Date issuedAt;
+
+    @Column(name = "expired_at", nullable = false)
     @UpdateTimestamp
-    private Instant expiredAt;
+    private Date expiredAt;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private TokenStatus status = TokenStatus.ACTIVE;
+
+    @Column(name = "created_at", updatable = false, nullable = false)
+    @CreationTimestamp
+    private Instant createdAt;
+
+    @Column(name = "updated_at", updatable = true, nullable = false)
+    @UpdateTimestamp
+    private Instant updatedAt;
 }
