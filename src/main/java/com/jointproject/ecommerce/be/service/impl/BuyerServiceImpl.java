@@ -1,41 +1,38 @@
 package com.jointproject.ecommerce.be.service.impl;
 
-import com.jointproject.ecommerce.be.db.entity.Buyer;
+import com.jointproject.ecommerce.be.db.entity.BuyerEntity;
 import com.jointproject.ecommerce.be.db.repository.BuyerRepository;
-import com.jointproject.ecommerce.be.dto.BuyerDto;
+import com.jointproject.ecommerce.be.exception.ApiException;
+import com.jointproject.ecommerce.be.pojo.request.BuyerDto;
 import com.jointproject.ecommerce.be.pojo.response.CommonResponse;
-import com.jointproject.ecommerce.be.security.PasswordEncoded;
+import com.jointproject.ecommerce.be.pojo.response.ResultResponse;
+import com.jointproject.ecommerce.be.configuration.PasswordEncoded;
 import com.jointproject.ecommerce.be.service.BuyerService;
+import com.jointproject.ecommerce.be.utility.CreateObject;
 import com.jointproject.ecommerce.be.utility.enums.ResultStatus;
-import com.jointproject.ecommerce.be.validation.PasswordValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
-import java.util.Date;
 import java.util.Objects;
 
 @Service
 public class BuyerServiceImpl implements BuyerService {
 
+    private final BuyerRepository buyerRepository;
+    private final CreateObject createObject;
+
     @Autowired
-    private BuyerRepository buyerRepository;
+    public BuyerServiceImpl(BuyerRepository buyerRepository,
+                            CreateObject createObject){
+        this.buyerRepository = buyerRepository;
+        this.createObject = createObject;
+    }
 
     @Override
-    public CommonResponse buyerRegistration(BuyerDto buyerDto) {
-        Buyer checkByEmail = buyerRepository.findByEmail(buyerDto.getEmail());
-        Buyer checkByUserName = buyerRepository.findByUserName(buyerDto.getUserName());
+    public ResultResponse buyerRegistration(BuyerDto buyerDto) {
+        buyerValidation(buyerDto);
 
-        if(Objects.nonNull(checkByEmail)){
-            return new CommonResponse(ResultStatus.BAD_REQUEST.getValue(), "email already registered");
-        }
-        if (Objects.nonNull(checkByUserName)){
-            return new CommonResponse(ResultStatus.BAD_REQUEST.getValue(), "user name already registered");
-        }
-        if (!new PasswordValidation().isValidPassword(buyerDto.getPassword())){
-            return new CommonResponse(ResultStatus.BAD_REQUEST.getValue(), "your password does not valid");
-        }
-        Buyer buyer = new Buyer();
+        BuyerEntity buyer = new BuyerEntity();
         buyer.setName(buyerDto.getName());
         buyer.setEmail(buyerDto.getEmail());
         buyer.setUserName(buyerDto.getUserName());
@@ -43,11 +40,22 @@ public class BuyerServiceImpl implements BuyerService {
         buyer.setAddress(buyerDto.getAddress());
         buyer.setBalance(buyerDto.getBalance());
         buyer.setImage(buyerDto.getImage());
-        buyer.setCreatedAt(new Date());
-        buyer.setUpdatedAt(new Date());
 
         buyerRepository.save(buyer);
 
-        return new CommonResponse(ResultStatus.SUCCESS.getValue(), "Registration successful");
+        return createObject.createResultResponse(
+                new CommonResponse(ResultStatus.SUCCESS.getValue(), ResultStatus.REGISTRATION_SUCCESS));
+    }
+
+    private void buyerValidation(BuyerDto buyerDto) {
+        BuyerEntity buyerEntityByEmail = buyerRepository.findByEmail(buyerDto.getEmail());
+        BuyerEntity buyerEntityByUserName = buyerRepository.findByUserName(buyerDto.getUserName());
+
+        if(Objects.nonNull(buyerEntityByEmail)){
+            throw new ApiException(ResultStatus.EMAIL_ALREADY_EXIST, ResultStatus.EMAIL_ALREADY_EXIST.getValue());
+        }
+        if (Objects.nonNull(buyerEntityByUserName)){
+            throw new ApiException(ResultStatus.USERNAME_ALREADY_EXIST, ResultStatus.USERNAME_ALREADY_EXIST.getValue());
+        }
     }
 }

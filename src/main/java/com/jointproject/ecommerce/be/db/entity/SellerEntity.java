@@ -16,7 +16,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table
-public class Seller {
+public class SellerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -42,13 +42,13 @@ public class Seller {
     private String address;
 
     @Column(name = "balance")
-    private double balance = 0;
+    private Double balance = 0.0;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false, nullable = false)
-    private Date createdAt;
+    private Instant createdAt;
 
     @UpdateTimestamp
     @Column(name = "updated_at", updatable = true, nullable = false)
-    private Date updatedAt;
+    private Instant updatedAt;
 }

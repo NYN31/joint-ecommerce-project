@@ -1,4 +1,4 @@
-package com.jointproject.ecommerce.be.security;
+package com.jointproject.ecommerce.be.configuration;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
