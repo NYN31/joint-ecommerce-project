@@ -50,11 +50,16 @@
             <artifactId>spring-security-core</artifactId>
             <version>5.5.2</version>
         </dependency>
-        <!--		<dependency>-->
-<!--			<groupId>org.hibernate.validator</groupId>-->
-<!--			<artifactId>hibernate-validator</artifactId>-->
-<!--			<version>6.1.5.Final</version>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>7.0.4.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>

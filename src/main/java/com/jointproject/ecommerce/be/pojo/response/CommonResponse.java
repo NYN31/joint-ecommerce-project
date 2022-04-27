@@ -10,5 +10,5 @@ import lombok.*;
 @NoArgsConstructor
 public class CommonResponse {
     private Integer code;
-    private String message;
+    private ResultStatus resultStatus;
 }

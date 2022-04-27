@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResultResponse {
-    private ResultStatus resultStatus;
+    private Integer value;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Object data;
