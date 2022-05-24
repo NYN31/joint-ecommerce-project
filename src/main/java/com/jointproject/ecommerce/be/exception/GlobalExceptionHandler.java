@@ -40,7 +40,7 @@ public class GlobalExceptionHandler {
 
         CommonResponse response = new CommonResponse();
         response.setResultStatus(e.getResultStatus());
-        response.setCode(e.getResultStatus().getValue());
+        response.setCode(e.getCode());
 
         return createObject.createResultResponse(response);
     }

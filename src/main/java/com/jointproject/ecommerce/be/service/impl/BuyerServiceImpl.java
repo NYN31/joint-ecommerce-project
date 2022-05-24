@@ -10,11 +10,13 @@ import com.jointproject.ecommerce.be.configuration.PasswordEncoded;
 import com.jointproject.ecommerce.be.service.BuyerService;
 import com.jointproject.ecommerce.be.utility.CreateObject;
 import com.jointproject.ecommerce.be.utility.enums.ResultStatus;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
+@Slf4j
 @Service
 public class BuyerServiceImpl implements BuyerService {
 
@@ -42,6 +44,7 @@ public class BuyerServiceImpl implements BuyerService {
         buyer.setImage(buyerDto.getImage());
 
         buyerRepository.save(buyer);
+        log.info("Buyer added successfully: {}", buyer);
 
         return createObject.createResultResponse(
                 new CommonResponse(ResultStatus.SUCCESS.getValue(), ResultStatus.REGISTRATION_SUCCESS));

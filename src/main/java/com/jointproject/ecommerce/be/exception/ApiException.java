@@ -7,7 +7,7 @@ public class ApiException extends RuntimeException{
     private final ResultStatus resultStatus;
 
     public ApiException() {
-        this.code = 400;
+        this.code = ResultStatus.BAD_REQUEST.getValue();
         this.resultStatus = ResultStatus.BAD_REQUEST;
     }
 

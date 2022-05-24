@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/seller")
 public class SellerController {
@@ -22,7 +24,7 @@ public class SellerController {
     }
 
     @PostMapping("/registration")
-    public ResultResponse sellerRegistration(@RequestBody SellerDto sellerDto){
+    public ResultResponse sellerRegistration(@Valid @RequestBody SellerDto sellerDto){
         return sellerService.sellerRegistration(sellerDto);
     }
 }
