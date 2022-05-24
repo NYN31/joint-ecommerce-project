@@ -7,6 +7,6 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class JwtTokenResponse extends CommonResponse{
+public class JwtTokenResponse {
     private String token;
 }

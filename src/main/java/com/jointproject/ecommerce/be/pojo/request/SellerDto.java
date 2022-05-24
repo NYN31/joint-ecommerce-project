@@ -1,5 +1,8 @@
 package com.jointproject.ecommerce.be.pojo.request;
 
+import com.jointproject.ecommerce.be.utility.annotations.password.StrongPassword;
+import com.jointproject.ecommerce.be.utility.enums.RoleStatus;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -14,6 +17,7 @@ public class SellerDto {
     @NotNull
     private String email;
 
+    @StrongPassword
     @NotNull
     private String password;
 
