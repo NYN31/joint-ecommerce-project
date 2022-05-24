@@ -3,6 +3,7 @@ package com.jointproject.ecommerce.be.utility.enums;
 public enum ResultStatus {
     SUCCESS(200),
     BAD_REQUEST(400),
+    UNAUTHORIZED(401),
     INTERNAL_SERVER_ERROR(500),
 
     TOKEN_VALID(1000),
