@@ -10,5 +10,5 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=joinEcommerce
-      - MYSQL_USER=Ecommerce
-      - MYSQL_PASSWORD=mysql
+      - MYSQL_USER=joinEcommerce
+      - MYSQL_PASSWORD=joinEcommerce
