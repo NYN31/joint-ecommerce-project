@@ -1,5 +1,7 @@
 package com.jointproject.ecommerce.be.db.entity;
 
+import com.jointproject.ecommerce.be.utility.annotations.password.StrongPassword;
+import com.jointproject.ecommerce.be.utility.enums.RoleStatus;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Length;
@@ -29,6 +31,7 @@ public class BuyerEntity {
     @NotNull
     private String email;
 
+    @StrongPassword
     @Length(min = 6)
     @Column(name = "password", length = 255)
     @NotNull
@@ -43,6 +46,12 @@ public class BuyerEntity {
 
     @Column(name = "balance")
     private Double balance = 0.0;
+
+    @Column(name = "roleStatus")
+    private RoleStatus roleStatus;
+
+    @Column(name = "enabled")
+    private Boolean enabled;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false, nullable = false)
@@ -114,6 +123,22 @@ public class BuyerEntity {
 
     public void setBalance(Double balance) {
         this.balance = balance;
+    }
+
+    public RoleStatus getRoleStatus() {
+        return roleStatus;
+    }
+
+    public void setRoleStatus(RoleStatus roleStatus) {
+        this.roleStatus = roleStatus;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Instant getCreatedAt() {

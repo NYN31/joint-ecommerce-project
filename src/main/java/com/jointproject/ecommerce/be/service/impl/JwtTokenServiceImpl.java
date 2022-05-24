@@ -43,14 +43,10 @@ public class JwtTokenServiceImpl implements JwtTokenService {
     public String issuer;
     @Value("${token.subject}")
     public String subject;
-    public ResultResponse jwtTokenCreation(String email) {
-        String token = create(email);
 
-        JwtTokenResponse jwtTokenResponse = new JwtTokenResponse();
-        jwtTokenResponse.setToken(token);
-        jwtTokenResponse.setCode(ResultStatus.SUCCESS.getValue());
-
-        return createResultResponse(jwtTokenResponse);
+    @Override
+    public String jwtTokenCreation(String email) {
+        return create(email);
     }
 
     private String create(String email) {
@@ -89,6 +85,7 @@ public class JwtTokenServiceImpl implements JwtTokenService {
         return token;
     }
 
+    @Override
     public ResultResponse verify(String token) {
         log.info("Enter into verifyToken function.");
         try{

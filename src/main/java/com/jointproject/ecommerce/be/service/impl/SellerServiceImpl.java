@@ -10,6 +10,7 @@ import com.jointproject.ecommerce.be.configuration.PasswordEncoded;
 import com.jointproject.ecommerce.be.service.SellerService;
 import com.jointproject.ecommerce.be.utility.CreateObject;
 import com.jointproject.ecommerce.be.utility.enums.ResultStatus;
+import com.jointproject.ecommerce.be.utility.enums.RoleStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,8 @@ public class SellerServiceImpl implements SellerService {
         seller.setAddress(sellerDto.getAddress());
         seller.setBalance(sellerDto.getBalance());
         seller.setImage(sellerDto.getImage());
+        seller.setRoleStatus(RoleStatus.SELLER);
+        seller.setEnabled(true);
 
         sellerRepository.save(seller);
         log.info("seller added successfully: {}", seller);

@@ -10,6 +10,7 @@ import com.jointproject.ecommerce.be.configuration.PasswordEncoded;
 import com.jointproject.ecommerce.be.service.BuyerService;
 import com.jointproject.ecommerce.be.utility.CreateObject;
 import com.jointproject.ecommerce.be.utility.enums.ResultStatus;
+import com.jointproject.ecommerce.be.utility.enums.RoleStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,8 @@ public class BuyerServiceImpl implements BuyerService {
         buyer.setAddress(buyerDto.getAddress());
         buyer.setBalance(buyerDto.getBalance());
         buyer.setImage(buyerDto.getImage());
-
+        buyer.setRoleStatus(RoleStatus.BUYER);
+        buyer.setEnabled(true);
         buyerRepository.save(buyer);
         log.info("Buyer added successfully: {}", buyer);
 
