@@ -7,6 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
 
@@ -29,6 +30,7 @@ public class BuyerEntity {
 
     @Column(name = "email", unique = true, length = 255)
     @NotNull
+    @Email
     private String email;
 
     @StrongPassword
@@ -155,5 +157,18 @@ public class BuyerEntity {
 
     public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    @Override
+    public String toString() {
+        return "BuyerEntity{" +
+                "name='" + name + '\'' +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", balance=" + balance +
+                ", roleStatus=" + roleStatus +
+                ", enabled=" + enabled +
+                '}';
     }
 }

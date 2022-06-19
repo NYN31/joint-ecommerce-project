@@ -21,7 +21,7 @@ public class BuyerController {
     }
 
     @PostMapping("/registration")
-    public ResultResponse buyerRegistration(@RequestBody @Valid BuyerDto buyerDto){
+    public ResultResponse buyerRegistration(@Valid @RequestBody BuyerDto buyerDto){
         return buyerService.buyerRegistration(buyerDto);
     }
 

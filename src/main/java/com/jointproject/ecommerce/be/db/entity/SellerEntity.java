@@ -147,4 +147,17 @@ public class SellerEntity {
     public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    @Override
+    public String toString() {
+        return "SellerEntity{" +
+                "name='" + name + '\'' +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", balance=" + balance +
+                ", roleStatus=" + roleStatus +
+                ", enabled=" + enabled +
+                '}';
+    }
 }
